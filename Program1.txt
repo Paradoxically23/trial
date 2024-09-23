@@ -1,0 +1,43 @@
+class BankAccount:
+    def __init__(self, initial_balance):
+        # Initialize the balance
+        self.balance = initial_balance
+
+    def deposit(self, amount):
+        # Add the deposit amount to the balance
+        self.balance += amount
+        print(f"Deposited: {amount}. Updated balance: {self.balance}")
+
+    def withdraw(self, amount):
+        # Check if sufficient balance is available for withdrawal
+        if amount > self.balance:
+            print("Insufficient balance!")
+        else:
+            self.balance -= amount
+            print(f"Withdrew: {amount}. Updated balance: {self.balance}")
+
+# Initialize the account with an initial balance
+account = BankAccount(1000)
+
+# Loop to ask user for deposit or withdrawal action
+while True:
+    action = input("\nDo you want to deposit or withdraw? (type 'deposit', 'withdraw', or 'exit' to quit): ").lower()
+    
+    if action == "exit":
+        print("Exiting the program. Final balance:", account.balance)
+        break
+    
+    try:
+        # Get the amount from the user
+        amount = float(input("Enter amount: "))
+    except ValueError:
+        print("Invalid input! Please enter a valid number.")
+        continue
+    
+    # Perform deposit or withdrawal based on user's choice
+    if action == "deposit":
+        account.deposit(amount)
+    elif action == "withdraw":
+        account.withdraw(amount)
+    else:
+        print("Invalid choice! Please select 'deposit', 'withdraw', or 'exit'.")
